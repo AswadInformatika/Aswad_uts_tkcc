@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Activity Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 500px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #total {
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        ol {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        li {
+            background: #f9f9f9;
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Daily Activity Tracker</h2>
+
+    <label>Aktivitas:</label>
+    <input type="text" id="activity" placeholder="contoh: belajar, olahraga">
+
+    <label>Durasi (menit):</label>
+    <input type="number" id="duration" value="30">
+
+    <button onclick="tambahAktivitas()">Tambah</button>
+
+    <h3 id="total">Total: 0 menit (0 aktivitas)</h3>
+
+    <ol id="listAktivitas"></ol>
+</div>
+
+<script>
+    let totalMenit = 0;
+    let jumlahAktivitas = 0;
+
+    function tambahAktivitas() {
+        const aktivitas = document.getElementById("activity").value;
+        const durasi = parseInt(document.getElementById("duration").value);
+
+        if (aktivitas === "" || isNaN(durasi)) {
+            alert("Isi aktivitas dan durasi dengan benar!");
+            return;
+        }
+
+        totalMenit += durasi;
+        jumlahAktivitas++;
+
+        const li = document.createElement("li");
+        li.textContent = `${aktivitas} — ${durasi} menit`;
+
+        document.getElementById("listAktivitas").appendChild(li);
+
+        document.getElementById("total").textContent =
+            `Total: ${totalMenit} menit (${jumlahAktivitas} aktivitas)`;
+
+        document.getElementById("activity").value = "";
+        document.getElementById("duration").value = 30;
+    }
+</script>
+
+</body>
+</html>
